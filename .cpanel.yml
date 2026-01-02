@@ -1,0 +1,19 @@
+---
+# Tell cPanel how to deploy this repository
+deployment:
+  # List of tasks (shell commands) to run on deploy
+  tasks:
+    # Set the folder cPanel should deploy to
+    - export DEPLOYPATH=/home/mew2dgs1ryqa/repositories/Astro-Destiny 
+
+    # Install dependencies
+    - npm install
+
+    # Build the Astro project (produces the static `dist/` output)
+    - npm run build
+
+    # Remove old static files (optional, but good to avoid stale pages)
+    - rm -rf $DEPLOYPATH/*
+
+    # Copy all static build files into the public_html directory
+    - /bin/cp -R dist/* $DEPLOYPATH/
